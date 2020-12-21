@@ -27,13 +27,8 @@
 <main role="main" class="container">
 
     <div class="row">
-        
-        <?php include 'posts.php';?>
 
-        <nav class="blog-pagination">
-            <a class="btn btn-outline-primary" href="#">Older</a>
-            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-        </nav>
+        <?php include 'posts.php';?>
 
         <?php include 'sidebar.php';?>
 
