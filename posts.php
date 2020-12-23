@@ -21,13 +21,13 @@
         $statement = $connection->prepare($sql);
         $statement->execute();
         $statement->setFetchMode(PDO::FETCH_ASSOC);
-        $singlePost = $statement->fetchAll();
-        foreach ($singlePost as $element) { ?>
+        $posts = $statement->fetchAll();
+        foreach ($posts as $post) { ?>
             <div class="blog-post">
-                <a href="#"><h2 class="blog-post-title"><?php echo $element[title]?></h2></a>
-                <p class="blog-post-meta"><?php echo $element[created_at]?> by <a href="#"><?php echo $element[author]?></a></p>
-                <p><?php echo $element[body]?></p>
-                    <hr>
+                <a href="singlepost.php/search?q=<?php echo $post["ID"]?>"><h2 class="blog-post-title"><?php echo $post[title]?></h2></a>
+                <p class="blog-post-meta"><?php echo $post[created_at]?> by <a href="#"><?php echo $post[author]?></a></p>
+                <p><?php echo $post[body]?></p>
+                <hr>
             </div>
             <?php
         }
