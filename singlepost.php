@@ -62,7 +62,7 @@
                         foreach ($comments as $comment) { ?>
                             <li>
                                 <?php
-                                    echo $comment[Text]?> by <?php echo $comment[Author]
+                                    echo $comment[Text]?> <?php echo "<b>"."<i>"."by ".$comment[Author]."</i>"."</b>"
                                 ?>
                                 <hr>
                             </li>
