@@ -20,22 +20,8 @@
 </head>
 
 <body>
-
-
-<?php include 'header.php'?>;
-
-<main role="main" class="container">
-
-    <div class="row">
-
+    
         <?php include 'posts.php';?>
 
-        <?php include 'sidebar.php';?>
-
-    </div><!-- /.row -->
-
-</main><!-- /.container -->
-
-<?php include 'footer.php';?>
 </body>
 </html>
