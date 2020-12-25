@@ -15,8 +15,6 @@
         echo $e->getMessage();
     }
 ?>
-
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -39,25 +37,13 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-            <?php
-                $sql = "SELECT * FROM posts ORDER BY created_at DESC";
-                $statement = $connection->prepare($sql);
-                $statement->execute();
-                $statement->setFetchMode(PDO::FETCH_ASSOC);
-                $posts = $statement->fetchAll();
-                foreach ($posts as $post) { ?>
-                    <div class="blog-post">
-                        <a href="singlepost.php/search?q=<?php echo $post["ID"]?>"><h2 class="blog-post-title"><?php echo $post[title]?></h2></a>
-                        <p class="blog-post-meta"><?php echo $post[created_at]?> by <a href="#"><?php echo $post[author]?></a></p>
-                        <p><?php echo $post[body]?></p>
-                        <hr>
-                    </div>
-                    <?php
-                }
-            ?>
-            <div class="blog-post">
-                <a href="/create_post.php" class="blog-post-title">Add new post</a>
-            </div>
+            <form name="new post" action="/create_post.php" method="POST">
+                <h1>Please create your post below!</h1>
+                <p>Title: <input type="text" name="title" placeholder="Cool post" required/></p>
+                <p>Body: <input type="text" name="body" placeholder="This is a rainy day, so I can not ride my bycicle..." required/></p>
+                <p>Author: <input type="text" name="author" placeholder='W. Shakesbeer' required></p>
+                <button>Add post</button>
+            </form>
 
             <nav class="blog-pagination">
                 <a class="btn btn-outline-primary" href="#">Older</a>
@@ -72,3 +58,18 @@
 </main><!-- /.container -->
 
 <?php include 'footer.php';?>
+
+<?php    
+    if (!empty($_POST['author'])) {
+        $title = $_POST['title'];
+        $body = $_POST['body'];
+        $author = $_POST['author'];
+
+        $sqlCreate = "INSERT INTO `posts` (`title`, `body`, `author`) VALUES ('$title', '$body', '$author');";
+        $createStatement = $connection->prepare($sqlCreate);
+        //print_r($statement);
+        $createStatement->execute();
+        header('Location: posts.php');
+    }
+    
+?>
